@@ -1,5 +1,9 @@
 .PHONY: examples
 
+SZUNRAY_OUT = szunray
+SZUNRAY_DIR = szunray/resume
+SZUNRAY_SRCS = $(shell find $(SZUNRAY_DIR) -name '*.tex')
+
 CC = xelatex
 EXAMPLES_DIR = examples
 RESUME_DIR = examples/resume
@@ -17,6 +21,9 @@ cv.pdf: $(EXAMPLES_DIR)/cv.tex $(CV_SRCS)
 
 coverletter.pdf: $(EXAMPLES_DIR)/coverletter.tex
 	$(CC) -output-directory=$(EXAMPLES_DIR) $<
+
+szunray.pdf: $(SZUNRAY_OUT)/resume.tex $(SZUNRAY_SRCS)
+	$(CC) -output-directory=$(SZUNRAY_OUT) $<
 
 clean:
 	rm -rf $(EXAMPLES_DIR)/*.pdf
